@@ -7,3 +7,12 @@
   tasks:
     - name: Fetch a info file
       fetch: src=C:/DatabaseBkup/MetaData.xml dest=/home/user/MetaData.xml flat=yes 
+    - name: Read attribute value
+      xml:
+        path: /home/user/MetaData.xml
+        xpath: /DatabaseList/Item/Info/CreatedBy
+        content: text
+      register: xmlresp
+    - name: Print the value
+      debug:
+        msg:{{xmlresp}}
