@@ -5,3 +5,5 @@
 # https://docs.ansible.com/ansible/win_reboot_module.html
 - hosts: all
   tasks:
+    - name: Fetch a info file
+      fetch: src=C:/DatabaseBkup/MetaData.xml dest=/home/user/MetaData.xml flat=yes 
