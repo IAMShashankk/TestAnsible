@@ -10,8 +10,9 @@
     - name: Read attribute value
       xml:
         path: /home/user/MetaData.xml
-        xpath: /DatabaseList/Item/Info/CreatedBy
-        content: text
+        xpath: /DatabaseList
+        content: attribute
+        attribute: BackupAt
       register: xmlresp
     - name: Print the value
       debug:
