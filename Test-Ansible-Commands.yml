@@ -11,6 +11,9 @@
       win_stat:
         path: /home/user/MetaData.xml
       register: file_info
+      win_xml:
+        path: C:/DatabaseBkup/MetaData.xml
+      register: file_info1
     - name: Read attribute value
       xml:
         path: C:/DatabaseBkup/MetaData.xml
