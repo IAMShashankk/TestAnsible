@@ -6,22 +6,23 @@
 - hosts: all
   tasks:
     - name: Fetch a info file
-      fetch: src=C:/DatabaseBkup/MetaData.xml dest=/home/user/MetaData.xml flat=yes 
+      fetch: src=C:/DatabaseBkup/MetaData.xml dest=/tmp/ flat=yes 
     - name: Obtain information about a file
       win_stat:
-        path: /home/user/MetaData.xml
+        path: /tmp/MetaData.xml
       register: file_info
+    - debug: msg="the value of MetaData.txt is {{lookup('file', 'C:/DatabaseBkup/MetaData.xml') }}"
     - name: Read using win_xml 
       win_xml:
         path: C:/DatabaseBkup/MetaData.xml
       register: file_info1
     - name: Read attribute value
       xml:
-        path: C:/DatabaseBkup/MetaData.xml
+        path: /tmp/MetaData.xml
         xpath: /DatabaseList
         content: attribute
         attribute: BackupAt
       register: xmlresp
-    - name: Print the value
-      debug:
-        msg:{{xmlresp}}
+#    - name: Print the value
+#      debug:
+#        msg:{{xmlresp}}
