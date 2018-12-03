@@ -12,10 +12,6 @@
         path: /tmp/MetaData.xml
       register: file_info
     - debug: msg="the value of MetaData.txt is {{lookup('file', 'C:/DatabaseBkup/MetaData.xml') }}"
-    - name: Read using win_xml 
-      win_xml:
-        path: C:/DatabaseBkup/MetaData.xml
-      register: file_info1
     - name: Read attribute value
       xml:
         path: /tmp/MetaData.xml
