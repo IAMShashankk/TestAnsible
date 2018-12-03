@@ -5,7 +5,7 @@
 # https://docs.ansible.com/ansible/win_reboot_module.html
 - hosts: all
   vars:
-    myvars: "<DatabaseList Description="" BackupAt="11/14/18 18:11:48" DBServerName="127.0.0.1" DomainMode="Normal" LicenseKey=""><Item><Name>QWERTY1U8100750000</Name></Item></DatabaseList>"
+    myvars: "<DatabaseList Description=\"\" BackupAt=\"11/14/18 18:11:48\" DBServerName=\"127.0.0.1\" DomainMode=\"Normal\" LicenseKey=\"\"><Item><Name>QWERTY1U8100750000</Name></Item></DatabaseList>"
   tasks:
     - name: Fetch a info file
       fetch: src=C:/DatabaseBkup/MetaData.xml dest=/tmp/MetaData.xml flat=yes 
