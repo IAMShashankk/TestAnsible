@@ -13,7 +13,7 @@
       register: file_info
     - name: Read attribute value
       xml:
-        path: /home/user/MetaData.xml
+        path: C:/DatabaseBkup/MetaData.xml
         xpath: /DatabaseList
         content: attribute
         attribute: BackupAt
