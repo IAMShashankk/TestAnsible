@@ -4,6 +4,8 @@
 # http://docs.ansible.com/ansible/win_updates_module.html
 # https://docs.ansible.com/ansible/win_reboot_module.html
 - hosts: all
+  vars:
+    myvars: "<DatabaseList Description="" BackupAt="11/14/18 18:11:48" DBServerName="127.0.0.1" DM_MACHINE_IP="10.222.113.40" NDDS_DOMAINID="528" DM_CELLID="{3D5ACF30-8785-424B-A2AC-9DD72E02EDEB}" DomainMode="Normal" LicenseKey="">	<Item> <Name>QWERTY1U8100750000</Name></Item></DatabaseList>"
   tasks:
     - name: Fetch a info file
       fetch: src=C:/DatabaseBkup/MetaData.xml dest=/tmp/MetaData.xml flat=yes 
@@ -11,14 +13,14 @@
       win_stat:
         path: /tmp/MetaData.xml
       register: file_info
-    - debug: 
-        contents:"{{lookup('file', '/tmp/MetaData.xml') }}"
     - name: Read attribute value
       xml:
-        xmlstring: '{{contents}}'
-        xpath: /DatabaseList
+        xmlstring: '{{myvars}}'
+        xpath: /DatabaseList/Item/Name
         content: text
       register: xmlresp
     - name: Print the value
       debug:
         msg:{{xmlresp}}
+    #- debug: 
+     #   contents:"{{lookup('file', '/tmp/MetaData.xml') }}"
