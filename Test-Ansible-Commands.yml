@@ -6,16 +6,16 @@
 - hosts: all
   tasks:
     - name: Fetch a info file
-      fetch: src=C:/DatabaseBkup/MetaData.xml dest=/var/lib/awx/projects/_29__test_ansible_windows/ flat=yes 
+      fetch: src=C:/DatabaseBkup/MetaData.xml dest=/tmp/ flat=yes 
     - name: Obtain information about a file
       win_stat:
         path: /tmp/MetaData.xml
       register: file_info
     - debug: 
-        msg1:"{{lookup('file', '/var/lib/awx/projects/_29__test_ansible_windows/MetaData.xml') }}"
+        contents:"{{lookup('file', '/tmp/MetaData.xml') }}"
     - name: Read attribute value
       xml:
-        xmlstring: '{{msg1}}'
+        xmlstring: '{{contents}}'
         xpath: /DatabaseList
         content: text
       register: xmlresp
