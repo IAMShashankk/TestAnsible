@@ -7,6 +7,10 @@
   tasks:
     - name: Fetch a info file
       fetch: src=C:/DatabaseBkup/MetaData.xml dest=/home/user/MetaData.xml flat=yes 
+    - name: Obtain information about a file
+      win_stat:
+        path: /home/user/MetaData.xml
+      register: file_info
     - name: Read attribute value
       xml:
         path: /home/user/MetaData.xml
