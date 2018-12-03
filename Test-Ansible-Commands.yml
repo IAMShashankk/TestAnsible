@@ -13,14 +13,18 @@
       win_stat:
         path: /tmp/MetaData.xml
       register: file_info
-    - name: Read attribute value
-      xml:
-        xmlstring: '{{myvars}}'
-        xpath: /DatabaseList/Item/Name
-        content: text
-      register: xmlresp
-    - name: Print the value
-      debug:
-        msg:{{xmlresp}}
+    - name: Testing slurp
+      slurp:
+        path: C:/DatabaseBkup/MetaData.xml
+      register: version_file
+#    - name: Read attribute value
+#      xml:
+#        xmlstring: '{{myvars}}'
+#        xpath: /DatabaseList/Item/Name
+#        content: text
+#      register: xmlresp
+#    - name: Print the value
+#      debug:
+#        msg:{{xmlresp}}
 #- debug: 
 #   contents:"{{lookup('file', '/tmp/MetaData.xml') }}"
