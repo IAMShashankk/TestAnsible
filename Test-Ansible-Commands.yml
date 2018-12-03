@@ -6,7 +6,7 @@
 - hosts: all
   tasks:
     - name: Fetch a info file
-      fetch: src=C:/DatabaseBkup/MetaData.xml dest=/tmp/ flat=yes 
+      fetch: src=C:/DatabaseBkup/MetaData.xml dest=/tmp/MetaData.xml flat=yes 
     - name: Obtain information about a file
       win_stat:
         path: /tmp/MetaData.xml
