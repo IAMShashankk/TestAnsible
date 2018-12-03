@@ -15,7 +15,7 @@
       command: "ls /tmp/"
       register: dir_out
     - debug: msg="the value of MetaData.txt is {{lookup('file', '/tmp/MetaData.xml') }}"
-    - name: Read attribute value- name: Read attribute value
+    - name: Read attribute value
       xml:
         path: /tmp/MetaData.xml
         xpath: /DatabaseList
