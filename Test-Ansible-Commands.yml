@@ -6,15 +6,22 @@
 - hosts: all
   tasks:
     - name: Fetch a info file
-      fetch: src=C:/DatabaseBkup/MetaData.xml dest=/tmp/ flat=yes 
+      fetch: src=C:/DatabaseBkup/MetaData.xml dest=/var/lib/awx/projects/_29__test_ansible_windows/ flat=yes 
     - name: Obtain information about a file
       win_stat:
         path: /tmp/MetaData.xml
       register: file_info
+    - name: Ansible find file examples
+      find:
+        paths: /var/lib/awx/projects/_29__test_ansible_windows
+        patterns: "*.xml"
+      register: files_matched
+    - debug:
+      msg: "{{ files_matched.files }}"
     - name: list files
       command: "ls /tmp/"
       register: dir_out
-    - debug: msg="the value of MetaData.txt is {{lookup('file', '/tmp/MetaData.xml') }}"
+    - debug: msg="the value of MetaData.txt is {{lookup('file', '/var/lib/awx/projects/_29__test_ansible_windows/MetaData.xml') }}"
     - name: Read attribute value
       xml:
         path: /tmp/MetaData.xml
