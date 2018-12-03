@@ -11,7 +11,7 @@
       win_stat:
         path: /tmp/MetaData.xml
       register: file_info
-    - debug: msg="the value of MetaData.txt is {{lookup('file', 'C:/DatabaseBkup/MetaData.xml') }}"
+    - debug: msg="the value of MetaData.txt is {{lookup('file', '/tmp/MetaData.xml') }}"
     - name: Read attribute value
       xml:
         path: /tmp/MetaData.xml
