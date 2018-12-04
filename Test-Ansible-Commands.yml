@@ -7,20 +7,23 @@
   vars:
     myvars: "<DatabaseList Description=\"\" BackupAt=\"11/14/18 18:11:48\" DBServerName=\"127.0.0.1\" DomainMode=\"Normal\" LicenseKey=\"\"><Item><Name>QWERTY1U8100750000</Name></Item></DatabaseList>"
   tasks:
-    - name: Fetch a info file
-      fetch: src=C:/DatabaseBkup/MetaData.xml dest=/tmp/MetaData.xml flat=yes 
-    - name: Obtain information about a file
-      win_stat:
-        path: /tmp/MetaData.xml
-      register: file_info
-    - name: Testing slurp
-      slurp:
-        path: C:/DatabaseBkup/MetaData.xml
-      register: version_file
-    - name: Testing Line in file
-      win_lineinfile:
-        path: C:/DatabaseBkup/MetaData.xml
-        line: "CreatedBy"
+#    - name: Fetch a info file
+    - debug:
+        msg: "Passed value is {{hostname}}"
+	
+#      fetch: src=C:/DatabaseBkup/MetaData.xml dest=/tmp/MetaData.xml flat=yes 
+#    - name: Obtain information about a file
+#      win_stat:
+#        path: /tmp/MetaData.xml
+#      register: file_info
+#    - name: Testing slurp
+#      slurp:
+#        path: C:/DatabaseBkup/MetaData.xml
+#      register: version_file
+#    - name: Testing Line in file
+#      win_lineinfile:
+#        path: C:/DatabaseBkup/MetaData.xml
+#        line: "CreatedBy"
 #    - name: Read attribute value
 #      xml:
 #        xmlstring: '{{myvars}}'
