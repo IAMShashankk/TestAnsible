@@ -9,7 +9,6 @@
   tasks:
     - debug:
         msg: "Passed value is {{hostname}}"
-	
 #      fetch: src=C:/DatabaseBkup/MetaData.xml dest=/tmp/MetaData.xml flat=yes 
 #    - name: Obtain information about a file
 #      win_stat:
