@@ -10,3 +10,6 @@
     - import_tasks: Test-Ansible-Commands.yml
       vars:
         hostname: abc
+    - import_tasks: Test-Ansible-Commands.yml
+      vars:
+        hostname: shashank
