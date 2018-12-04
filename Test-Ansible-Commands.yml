@@ -7,7 +7,6 @@
   vars:
     myvars: "<DatabaseList Description=\"\" BackupAt=\"11/14/18 18:11:48\" DBServerName=\"127.0.0.1\" DomainMode=\"Normal\" LicenseKey=\"\"><Item><Name>QWERTY1U8100750000</Name></Item></DatabaseList>"
   tasks:
-#    - name: Fetch a info file
     - debug:
         msg: "Passed value is {{hostname}}"
 	
