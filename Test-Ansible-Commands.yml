@@ -4,11 +4,9 @@
 # http://docs.ansible.com/ansible/win_updates_module.html
 # https://docs.ansible.com/ansible/win_reboot_module.html
 #- hosts: all
-#  vars:
-#    myvars: "<DatabaseList Description=\"\" BackupAt=\"11/14/18 18:11:48\" DBServerName=\"127.0.0.1\" DomainMode=\"Normal\" LicenseKey=\"\"><Item><Name>QWERTY1U8100750000</Name></Item></DatabaseList>"
-tasks:
-  - debug:
-      msg: "Passed value is {{hostname}}"
+  tasks:
+    - debug:
+        msg: "Passed value is {{hostname}}"
 #      fetch: src=C:/DatabaseBkup/MetaData.xml dest=/tmp/MetaData.xml flat=yes 
 #    - name: Obtain information about a file
 #      win_stat:
