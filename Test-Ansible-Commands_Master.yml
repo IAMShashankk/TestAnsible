@@ -7,4 +7,4 @@
   tasks:
     - import_tasks: Test-Ansible-Commands.yml
       vars:
-        wp_user: timmy
+        hostname: Shashank
