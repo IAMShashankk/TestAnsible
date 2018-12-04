@@ -5,6 +5,4 @@
 # https://docs.ansible.com/ansible/win_reboot_module.html
 - hosts: all
   tasks:
-    - import_tasks: Test-Ansible-Commands.yml
-      vars:
-        hostname: Shashank
+    - import_tasks: Test-Ansible-Commands.yml hostname=timmy
