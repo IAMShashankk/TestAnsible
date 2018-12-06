@@ -13,3 +13,8 @@
     - import_tasks: Test-Ansible-Commands.yml
       vars:
         hostname: shashank
+    - name: Unzip the Download ActivateCatalog zip
+      win_unzip:
+        src: C:\DatabaseBkup\TestAnsible.hzp
+        dest: C:\temp\
+        rm: True
