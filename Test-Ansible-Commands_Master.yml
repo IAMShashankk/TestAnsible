@@ -13,8 +13,10 @@
     - import_tasks: Test-Ansible-Commands.yml
       vars:
         hostname: shashank
+    - name: rename the file
+      win_command: "cmd.exe /c rename C:\DatabaseBkup\\TestAnsible.hzp TestAnsible.zip"
     - name: Unzip the Download ActivateCatalog zip
       win_unzip:
-        src: C:\DatabaseBkup\TestAnsible.hzp
+        src: C:\DatabaseBkup\TestAnsible.zip
         dest: C:\temp\
         rm: True
