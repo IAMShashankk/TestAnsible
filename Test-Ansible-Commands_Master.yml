@@ -6,6 +6,7 @@
 - hosts: all
   vars:
     hostname: shasha
+    buildVersion:xyz
   tasks:
     - import_tasks: Test-Ansible-Commands.yml
       vars:
@@ -18,6 +19,14 @@
         xpath: '/*'
         attribute: DBServerName
         type: attribute
+    - name: run multi-lined shell commands
+      win_shell: |
+       $xml = Get-Content C:\DatabaseBkup\MetaData.xml
+        if ($value) {
+        $xml.DatabaseList.Item.Info.CreatedBy
+        }
+      register: homedir_out
+        
 #    - name: Copy the Activate Catalog file
 #      win_copy:
 #        src: C:\DatabaseBkup\TestAnsible.hzp
