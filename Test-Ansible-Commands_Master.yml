@@ -15,10 +15,8 @@
         hostname: shashank
     - name: run multi-lined shell commands
       win_shell: |
-       $xml = Get-Content C:\DatabaseBkup\MetaData.xml
-        if ($value) {
+        $xml = Get-Content C:\DatabaseBkup\MetaData.xml
         $xml.DatabaseList.Item.Info.CreatedBy
-        }
       register: homedir_out
         
 #    - name: Copy the Activate Catalog file
