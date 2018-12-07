@@ -13,13 +13,18 @@
     - import_tasks: Test-Ansible-Commands.yml
       vars:
         hostname: shashank
-    - name: Copy the Activate Catalog file
-      win_copy:
-        src: C:\DatabaseBkup\TestAnsible.hzp
-        dest: C:\temp\TestAnsible.hzp
-        remote_src: yes
-    - name: rename the file
-      win_command: cmd.exe /C rename C:\temp\TestAnsible.hzp TestAnsible1.zip
+    - win_xml:
+        path: C:\DatabaseBkup\MetaData.xml
+        xpath: '/*'
+        attribute: DBServerName
+        type: attribute
+#    - name: Copy the Activate Catalog file
+#      win_copy:
+#        src: C:\DatabaseBkup\TestAnsible.hzp
+#        dest: C:\temp\TestAnsible.hzp
+#        remote_src: yes
+#    - name: rename the file
+#      win_command: cmd.exe /C rename C:\temp\TestAnsible.hzp TestAnsible1.zip
 #    - name: Unzip the Download ActivateCatalog zip
 #      win_unzip:
 #        src: C:\DatabaseBkup\TestAnsible1.zip
