@@ -14,7 +14,7 @@
       vars:
         hostname: shashank
     - name: rename the file
-      win_command: "cmd.exe /C rename C:\DatabaseBkup\TestAnsible.hzp TestAnsible1.zip"
+      win_command: cmd.exe /C rename C:\DatabaseBkup\TestAnsible.hzp TestAnsible1.zip
     - name: Unzip the Download ActivateCatalog zip
       win_unzip:
         src: C:\DatabaseBkup\TestAnsible1.zip
