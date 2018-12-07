@@ -16,7 +16,7 @@
     - name: run multi-lined shell commands
       win_shell: |
         $xml = Get-Content C:\DatabaseBkup\MetaData.xml
-        $xml
+        $xml.DatabaseList
       register: homedir_out
      
 #$xml.DatabaseList.Item.Info.CreatedBy	 
