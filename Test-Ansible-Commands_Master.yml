@@ -6,7 +6,6 @@
 - hosts: all
   vars:
     hostname: shasha
-    buildVersion:xyz
   tasks:
     - import_tasks: Test-Ansible-Commands.yml
       vars:
