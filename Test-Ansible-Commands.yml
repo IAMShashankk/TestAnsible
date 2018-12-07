@@ -29,5 +29,5 @@
 #    - name: Print the value
 #      debug:
 #        msg:{{xmlresp}}
-#- debug: 
-#   contents:"{{lookup('file', '/tmp/MetaData.xml') }}"
+#    - debug: 
+#        contents:"{{lookup('file', '/tmp/MetaData.xml') }}"
