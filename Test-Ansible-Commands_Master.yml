@@ -19,7 +19,7 @@
         $xml.DatabaseList.Item.Info.CreatedBy
       register: homedir_out
     - debug:
-        msg: homedir_out.stdout_lines[0]
+        msg: {{homedir_out.stdout_lines[0]}}
      
 #$xml.DatabaseList.Item.Info.CreatedBy	 
 #    - name: Copy the Activate Catalog file
