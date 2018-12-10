@@ -13,6 +13,10 @@
     - import_tasks: Test-Ansible-Commands.yml
       vars:
         hostname: shashank
+    - name: Download ActivateCatalog zip
+      win_get_url:
+        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/scm/nmxgroup/nmx_playbooks.git"
+        dest: c:\temp\
     - name: run multi-lined shell commands
       win_shell: |
         [xml]$xml = Get-Content C:\DatabaseBkup\MetaData.xml
