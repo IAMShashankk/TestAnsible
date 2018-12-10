@@ -18,6 +18,8 @@
         [xml]$xml = Get-Content C:\DatabaseBkup\MetaData.xml
         $xml.DatabaseList.Item.Info.CreatedBy
       register: homedir_out
+    - debug:
+        msg1: homedir_out.stdout_lines[0]
      
 #$xml.DatabaseList.Item.Info.CreatedBy	 
 #    - name: Copy the Activate Catalog file
