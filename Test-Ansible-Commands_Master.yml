@@ -17,7 +17,7 @@
       win_get_url:
         url: "https://bitbucket360.harmonicinc.com/rest/api/latest/projects/NMXGROUP/repos/nmx_playbooks/archive?format=zip"
         dest: c:\temp\
-        user:: hls\smishra
+        user: smishra
         pass: India@1942
     - name: run multi-lined shell commands
       win_shell: |
