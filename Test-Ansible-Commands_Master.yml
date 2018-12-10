@@ -17,8 +17,8 @@
       win_get_url:
         url: "https://bitbucket360.harmonicinc.com/rest/api/latest/projects/NMXGROUP/repos/nmx_playbooks/archive?format=zip"
         dest: c:\temp\
-        username: 'smishra'
-        password: 'India@1942'
+        username: smishra
+        password: India@1942
     - name: run multi-lined shell commands
       win_shell: |
         [xml]$xml = Get-Content C:\DatabaseBkup\MetaData.xml
