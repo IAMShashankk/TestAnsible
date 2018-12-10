@@ -17,9 +17,9 @@
       win_shell: |
         [xml]$xml = Get-Content C:\DatabaseBkup\MetaData.xml
         $xml.DatabaseList.Item.Info.CreatedBy
-      register: homedir_out
+      register: shell_result
     - debug:
-        msg: homedir_out.stdout_lines
+        var: shell_result.stdout_lines
      
 #$xml.DatabaseList.Item.Info.CreatedBy	 
 #    - name: Copy the Activate Catalog file
