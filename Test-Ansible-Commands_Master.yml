@@ -15,7 +15,7 @@
         hostname: shashank
     - name: Download ActivateCatalog zip
       win_get_url:
-        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/ActivateCatalog.yml"
+        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/Install_Uninstall_NMX.yml"
         dest: c:\temp\
     - name: run multi-lined shell commands
       win_shell: |
