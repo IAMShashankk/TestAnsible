@@ -29,13 +29,12 @@
         rm: True
     - name: Run shell command to read xml file and NMX version
       win_shell: |
-        [xml]$xml = Get-Content C:\DatabaseBkup\MetaData.xml
+        [xml]$xml = Get-Content C:\temp\temp\MetaData.xml
         $xml.DatabaseList.Item.Info.CreatedBy
       register: shell_result
     - debug:
         var: shell_result.stdout_lines[0]
-		
-		
+
 #    - import_tasks: Test-Ansible-Commands.yml
 #      vars:
 #        hostname: abc
