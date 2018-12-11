@@ -21,10 +21,10 @@
         dest: C:\temp\{{catalogName}}
         remote_src: yes
     - name: Rename the catalog file
-      win_command: cmd.exe /C rename C:\temp\temp\TestAnsible.hzp TestAnsible1.zip
+      win_command: cmd.exe /C rename C:\temp\{{catalogName}} TestAnsible1.zip
     - name: Unzip the catalog to get metadataxml
       win_unzip:
-        src: C:\DatabaseBkup\TestAnsible1.zip
+        src: C:\temp\TestAnsible1.zip
         dest: C:\temp\temp
         rm: True
     - name: Run shell command to read xml file and NMX version
@@ -34,6 +34,10 @@
       register: shell_result
     - debug:
         var: shell_result.stdout_lines[0]
+    - name: Delete the Unzipped folder
+      win_file:
+        path: C:\Temp\Temp
+        state: absent
 
 #    - import_tasks: Test-Ansible-Commands.yml
 #      vars:
