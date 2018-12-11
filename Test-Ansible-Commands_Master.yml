@@ -21,7 +21,7 @@
         dest: C:\temp\{{catalogName}}
         remote_src: yes
     - name: Rename the catalog file
-      win_command: cmd.exe /C rename C:\temp\TestAnsible.hzp TestAnsible1.zip
+      win_command: cmd.exe /C rename C:\temp\temp\TestAnsible.hzp TestAnsible1.zip
     - name: Unzip the catalog to get metadataxml
       win_unzip:
         src: C:\DatabaseBkup\TestAnsible1.zip
