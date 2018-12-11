@@ -38,27 +38,3 @@
       win_file:
         path: C:\Temp\Temp
         state: absent
-
-#    - import_tasks: Test-Ansible-Commands.yml
-#      vars:
-#        hostname: abc
-#    - import_tasks: Test-Ansible-Commands.yml
-#      vars:
-#        hostname: shashank
-#    - name: Download ActivateCatalog zip
-#      win_get_url:
-#        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/Install_Uninstall_NMX.yml"
-#        dest: c:\temp\  
-#$xml.DatabaseList.Item.Info.CreatedBy	 
-#    - name: Copy the Activate Catalog file
-#      win_copy:
-#        src: C:\DatabaseBkup\TestAnsible.hzp
-#        dest: C:\temp\TestAnsible.hzp
-#        remote_src: yes
-#    - name: rename the file
-#      win_command: cmd.exe /C rename C:\temp\TestAnsible.hzp TestAnsible1.zip
-#    - name: Unzip the Download ActivateCatalog zip
-#      win_unzip:
-#        src: C:\DatabaseBkup\TestAnsible1.zip
-#        dest: C:\temp\
-#        rm: True
