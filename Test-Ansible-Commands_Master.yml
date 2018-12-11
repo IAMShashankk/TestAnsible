@@ -7,24 +7,45 @@
   vars:
     hostname: shasha
   tasks:
-    - import_tasks: Test-Ansible-Commands.yml
-      vars:
-        hostname: abc
-    - import_tasks: Test-Ansible-Commands.yml
-      vars:
-        hostname: shashank
-    - name: Download ActivateCatalog zip
+    - set_fact:
+        catalogName: "{{catalog_url.split('/')[-1]}}"
+    - name: Download catalog from specified URL
       win_get_url:
-        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/Install_Uninstall_NMX.yml"
-        dest: c:\temp\
-    - name: run multi-lined shell commands
+        url: "{{catalog_url}}"
+        dest: c:\DatabaseBkup\
+        url_username: "{{url_username}}"
+        url_password: "{{url_password}}"
+    - name: Copy the Catalog file to Temp
+      win_copy:
+        src: C:\DatabaseBkup\{{catalogName}}
+        dest: C:\temp\{{catalogName}}
+        remote_src: yes
+    - name: Rename the catalog file
+      win_command: cmd.exe /C rename C:\temp\TestAnsible.hzp TestAnsible1.zip
+    - name: Unzip the catalog to get metadataxml
+      win_unzip:
+        src: C:\DatabaseBkup\TestAnsible1.zip
+        dest: C:\temp\temp
+        rm: True
+    - name: Run shell command to read xml file and NMX version
       win_shell: |
         [xml]$xml = Get-Content C:\DatabaseBkup\MetaData.xml
         $xml.DatabaseList.Item.Info.CreatedBy
       register: shell_result
     - debug:
         var: shell_result.stdout_lines[0]
-     
+		
+		
+#    - import_tasks: Test-Ansible-Commands.yml
+#      vars:
+#        hostname: abc
+#    - import_tasks: Test-Ansible-Commands.yml
+#      vars:
+#        hostname: shashank
+#    - name: Download ActivateCatalog zip
+#      win_get_url:
+#        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/Install_Uninstall_NMX.yml"
+#        dest: c:\temp\  
 #$xml.DatabaseList.Item.Info.CreatedBy	 
 #    - name: Copy the Activate Catalog file
 #      win_copy:
