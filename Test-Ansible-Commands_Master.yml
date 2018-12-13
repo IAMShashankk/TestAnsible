@@ -31,18 +31,20 @@
         [xml]$xml = Get-Content C:\temp\temp\MetaData.xml
         $xml.DatabaseList.Item.Info.CreatedBy
       register: shell_result
-    - set_fact:
-        constructbuildnumber: "{{shell_result.stdout_lines[0].split('/')}}"
-        version: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.x.{{constructbuildnumber[3]}}"
-        buildnumber: "{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.{{constructbuildnumber[2]}}.{{constructbuildnumber[3]}}.{{constructbuildnumber[4]}}{{ constructbuildnumber[5] | regex_replace('^0/', '') }}"
-      when: shell_result.stdout_lines[0].find("eng") == -1
     - debug: 
         msg:"version is {{version}} and build numbers is {{buildnumber}}"
+      when: shell_result.stdout_lines[0].find("eng") == -1
     - name: Delete the Unzipped folder
       win_file:
         path: C:\Temp\Temp
         state: absent
-
+#    - set_fact:
+#        constructbuildnumber: "{{shell_result.stdout_lines[0].split('.')}}"
+#        version: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.x.{{constructbuildnumber[3]}}"
+#        buildnumber: "{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.{{constructbuildnumber[2]}}.{{constructbuildnumber[3]}}.{{constructbuildnumber[4]}}{{ constructbuildnumber[5] | regex_replace('^0/', '') }}"
+#      when: shell_result.stdout_lines[0].find("eng") == -1
+		
+		
 #    - import_tasks: Test-Ansible-Commands.yml
 #      vars:
 #        hostname: abc
