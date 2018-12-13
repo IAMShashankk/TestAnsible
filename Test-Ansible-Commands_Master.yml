@@ -38,13 +38,12 @@
       win_file:
         path: C:\Temp\Temp
         state: absent
+
 #    - set_fact:
 #        constructbuildnumber: "{{shell_result.stdout_lines[0].split('.')}}"
 #        version: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.x.{{constructbuildnumber[3]}}"
 #        buildnumber: "{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.{{constructbuildnumber[2]}}.{{constructbuildnumber[3]}}.{{constructbuildnumber[4]}}{{ constructbuildnumber[5] | regex_replace('^0/', '') }}"
-#      when: shell_result.stdout_lines[0].find("eng") == -1
-		
-		
+#      when: shell_result.stdout_lines[0].find("eng") == -1		
 #    - import_tasks: Test-Ansible-Commands.yml
 #      vars:
 #        hostname: abc
