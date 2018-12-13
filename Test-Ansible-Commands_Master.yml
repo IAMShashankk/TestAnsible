@@ -38,6 +38,9 @@
     - set_fact:
         constructbuildnumber: "{{buildnumber.split('.')}}"
       when: buildnumber.find("eng") == -1
+    - set_fact:
+        version: "{{constructbuildnumber[5]}}"
+      when: constructbuildnumber[0] != -1
     - name: Delete the Unzipped folder
       win_file:
         path: C:\Temp\Temp
