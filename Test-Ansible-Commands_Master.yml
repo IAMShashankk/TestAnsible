@@ -32,15 +32,14 @@
         $xml.DatabaseList.Item.Info.CreatedBy
       register: shell_result
     - set_fact:
-        buildnumber: shell_result.stdout_lines[0]
+        buildnumber: "{{shell_result.stdout_lines[0]}}"
     - debug: 
         msg:"buildnumber is {{buildnumber}}"
-      when: shell_result.stdout_lines[0].find("eng") == -1
     - name: Delete the Unzipped folder
       win_file:
         path: C:\Temp\Temp
         state: absent
-
+#when: shell_result.stdout_lines[0].find("eng") == -1
 #    - set_fact:
 #        constructbuildnumber: "{{shell_result.stdout_lines[0].split('.')}}"
 #        version: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.x.{{constructbuildnumber[3]}}"
