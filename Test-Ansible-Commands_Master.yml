@@ -38,8 +38,7 @@
       when: buildnumber.find("eng") == -1
     - set_fact:
         constructbuildnumber: "{{buildnumber.split('.')}}"
-        version: "{{constructbuildnumber[1]}}"
-        hostname: "{{constructbuildnumber[5]}}"
+        version: "{{constructbuildnumber[5]}}"
       when: buildnumber.find("eng") == -1
     - name: Delete the Unzipped folder
       win_file:
