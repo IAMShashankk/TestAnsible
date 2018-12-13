@@ -33,7 +33,10 @@
       register: shell_result
     - set_fact:
         buildnumber: "{{shell_result.stdout_lines[0]}}"
-    - set_fact: 
+    - debug:
+        msg: Abc
+      when: buildnumber.find("eng") == -1
+    - set_fact:
         constructbuildnumber: "{{buildnumber.split('.')}}"
         version: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.x.{{constructbuildnumber[3]}}"
         buildnumber: "{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.{{constructbuildnumber[2]}}.{{constructbuildnumber[3]}}.{{constructbuildnumber[4]}}{{ constructbuildnumber[5] | regex_replace('^0/', '') }}"
