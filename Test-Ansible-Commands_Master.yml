@@ -3,7 +3,6 @@
   vars:
     hostname: shasha
     version: trunk
-    constructbuildnumber: abc
     buildnumber: 7.7.0.0-eng.101
   tasks:
     - set_fact:
