@@ -32,13 +32,10 @@
         $xml.DatabaseList.Item.Info.CreatedBy
       register: shell_result
     - set_fact:
-        version: "trunk"
-      when: "{{'eng' in shell_result.stdout_lines[0]}}"
-    - set_fact:
         constructbuildnumber: "{{shell_result.stdout_lines[0].split('/')}}"
         version: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.x.{{constructbuildnumber[3]}}"
         buildnumber: "{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.{{constructbuildnumber[2]}}.{{constructbuildnumber[3]}}.{{constructbuildnumber[4]}}{{ constructbuildnumber[5] | regex_replace('^0/', '') }}"
-      when: "{{'eng' not in shell_result.stdout_lines[0]}}"
+      when: shell_result.stdout_lines[0].find("eng") == -1
     - debug: 
         msg:"version is {{version}} and build numbers is {{buildnumber}}"
     - name: Delete the Unzipped folder
