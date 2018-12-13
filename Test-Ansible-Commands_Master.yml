@@ -42,41 +42,8 @@
     - set_fact:
         version: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.x.{{constructbuildnumber[3]}}"
         buildnumber: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.{{constructbuildnumber[2]}}.{{constructbuildnumber[3]}}.{{ constructbuildnumber[4] | regex_replace('^0', '')}}"
-        abc: "{{ constructbuildnumber[4] | regex_replace('^\0', '')}}"
-        abc1: "{{ constructbuildnumber[4] | regex_replace('^\\0', '')}}"
-        abc2: "{{ constructbuildnumber[4] | regex_replace('^\0/', '')}}"
-        abc3: "{{ constructbuildnumber[4] | regex_replace('^0/', '')}}"
       when: constructbuildnumber[0] != -1
     - name: Delete the Unzipped folder
       win_file:
         path: C:\Temp\Temp
         state: absent
-#when: shell_result.stdout_lines[0].find("eng") == -1
-#    - set_fact:
-#        constructbuildnumber: "{{shell_result.stdout_lines[0].split('.')}}"
-#        version: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.x.{{constructbuildnumber[3]}}"
-#        buildnumber: "{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.{{constructbuildnumber[2]}}.{{constructbuildnumber[3]}}.{{constructbuildnumber[4]}}{{ constructbuildnumber[5] | regex_replace('^0/', '') }}"
-#      when: shell_result.stdout_lines[0].find("eng") == -1		
-#    - import_tasks: Test-Ansible-Commands.yml
-#      vars:
-#        hostname: abc
-#    - import_tasks: Test-Ansible-Commands.yml
-#      vars:
-#        hostname: shashank
-#    - name: Download ActivateCatalog zip
-#      win_get_url:
-#        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/Install_Uninstall_NMX.yml"
-#        dest: c:\temp\  
-#$xml.DatabaseList.Item.Info.CreatedBy	 
-#    - name: Copy the Activate Catalog file
-#      win_copy:
-#        src: C:\DatabaseBkup\TestAnsible.hzp
-#        dest: C:\temp\TestAnsible.hzp
-#        remote_src: yes
-#    - name: rename the file
-#      win_command: cmd.exe /C rename C:\temp\TestAnsible.hzp TestAnsible1.zip
-#    - name: Unzip the Download ActivateCatalog zip
-#      win_unzip:
-#        src: C:\DatabaseBkup\TestAnsible1.zip
-#        dest: C:\temp\
-#        rm: True
