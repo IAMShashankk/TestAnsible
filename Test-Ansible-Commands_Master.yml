@@ -31,8 +31,10 @@
         [xml]$xml = Get-Content C:\temp\temp\MetaData.xml
         $xml.DatabaseList.Item.Info.CreatedBy
       register: shell_result
+    - set_fact:
+        buildnumber: shell_result.stdout_lines[0]
     - debug: 
-        msg:"version is {{version}} and build numbers is {{buildnumber}}"
+        msg:"buildnumber is {{buildnumber}}"
       when: shell_result.stdout_lines[0].find("eng") == -1
     - name: Delete the Unzipped folder
       win_file:
