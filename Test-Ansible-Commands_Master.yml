@@ -34,7 +34,7 @@
     - set_fact:
         buildnumber: "{{shell_result.stdout_lines[0]}}"
     - debug: 
-        msg:buildnumber
+        msg:"{{buildnumber}}"
     - name: Delete the Unzipped folder
       win_file:
         path: C:\Temp\Temp
