@@ -2,6 +2,9 @@
 - hosts: all
   vars:
     hostname: shasha
+    version: trunk
+    constructbuildnumber: abc
+    buildnumber: 7.7.0.0-eng.101
   tasks:
     - set_fact:
         catalogName: "{{catalog_url.split('/')[-1]}}"
@@ -28,9 +31,41 @@
         [xml]$xml = Get-Content C:\temp\temp\MetaData.xml
         $xml.DatabaseList.Item.Info.CreatedBy
       register: shell_result
-    - debug:
-        var: shell_result.stdout_lines[0]
+    - set_fact:
+        version: "trunk"
+      when: "{{'eng' in shell_result.stdout_lines[0]}}"
+    - set_fact:
+        constructbuildnumber: "{{shell_result.stdout_lines[0].split('/')}}"
+        version: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.x.{{constructbuildnumber[3]}}"
+        buildnumber: "{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.{{constructbuildnumber[2]}}.{{constructbuildnumber[3]}}.{{constructbuildnumber[4]}}{{ constructbuildnumber[5] | regex_replace('^0/', '') }}"
+      when: "{{'eng' not in shell_result.stdout_lines[0]}}"
+    - debug: 
+        msg:"version is {{version}} and build numbers is {{buildnumber}}"
     - name: Delete the Unzipped folder
       win_file:
         path: C:\Temp\Temp
         state: absent
+
+#    - import_tasks: Test-Ansible-Commands.yml
+#      vars:
+#        hostname: abc
+#    - import_tasks: Test-Ansible-Commands.yml
+#      vars:
+#        hostname: shashank
+#    - name: Download ActivateCatalog zip
+#      win_get_url:
+#        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/Install_Uninstall_NMX.yml"
+#        dest: c:\temp\  
+#$xml.DatabaseList.Item.Info.CreatedBy	 
+#    - name: Copy the Activate Catalog file
+#      win_copy:
+#        src: C:\DatabaseBkup\TestAnsible.hzp
+#        dest: C:\temp\TestAnsible.hzp
+#        remote_src: yes
+#    - name: rename the file
+#      win_command: cmd.exe /C rename C:\temp\TestAnsible.hzp TestAnsible1.zip
+#    - name: Unzip the Download ActivateCatalog zip
+#      win_unzip:
+#        src: C:\DatabaseBkup\TestAnsible1.zip
+#        dest: C:\temp\
+#        rm: True
