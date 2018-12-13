@@ -35,6 +35,7 @@
         buildnumber: "{{shell_result.stdout_lines[0]}}"
     - debug: 
         msg:"{{catalogName}}"
+      when: buildnumber.find("eng") != -1
     - name: Delete the Unzipped folder
       win_file:
         path: C:\Temp\Temp
