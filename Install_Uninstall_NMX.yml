@@ -84,7 +84,7 @@
     win_service:
       name: XServer
       state: stopped
-    when: XMSService..exists==true and XMSService.state == "running"
+    when: XMSService.exists==true and XMSService.state == "running"
   - name: Find the installation file
     win_find:
       paths: C:\Temp\nmx
