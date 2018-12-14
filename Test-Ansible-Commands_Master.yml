@@ -34,10 +34,10 @@
         version: "trunk"
       when: buildnumber.find("eng") != -1
     - set_fact:
+        constructbuildnumber: "{{buildnumber.split('.')}}"
+    - set_fact:
         version: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.x.{{constructbuildnumber[3]}}"
       when: buildnumber.find("eng") == -1
-    - set_fact:
-        constructbuildnumber: "{{buildnumber.split('.')}}"
     - set_fact:
         buildnumber: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.{{constructbuildnumber[2]}}.{{constructbuildnumber[3]}}.{{ constructbuildnumber[4] | regex_replace('^0', '')}}"
     - name: Delete the Unzipped folder
