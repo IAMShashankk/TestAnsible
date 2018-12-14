@@ -53,7 +53,7 @@
       register: pingresult
     - debug:
         msg: "Passed value is {{hostname}}"
-      when: pingresult.wait_attempts < 5
+      when: pingresult.wait_attempts > 5
 #    - import_tasks: Install_Uninstall_NMX.yml
 #      vars:
 #        nmx_version: "{{version}}"
