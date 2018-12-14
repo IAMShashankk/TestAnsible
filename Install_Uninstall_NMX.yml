@@ -111,7 +111,7 @@
     register: pingresult
   - name: Reboot NMX server after uninstalling NMX
     win_shell: Restart-Computer -Force
-      when: pingresult.wait_attempts > 5
+    when: pingresult.wait_attempts > 5
   - name: Wait 2 minutes for server to reboot
     pause:
       seconds: 120
