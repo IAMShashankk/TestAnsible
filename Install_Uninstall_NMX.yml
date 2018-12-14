@@ -1,7 +1,6 @@
 ---
 # Ansible playbook to Uninstall and Install NMX
-- hosts: all
-  tasks:
+#  tasks:
   - name: Get active catalog name
     win_reg_stat:
       path: HKLM:\SOFTWARE\Harmonic\MEM
@@ -92,8 +91,6 @@
       arguments: /SP- /SILENT /SUPPRESSMSGBOXES /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}"
       reboot_required: true
       state: present
-  - name: Setup Autologon for starting remote session after reboot
-    win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
   - name: Reboot NMX server after uninstalling NMX
     win_shell: Restart-Computer -Force
   - name: Wait 2 minutes for server to reboot
@@ -110,4 +107,3 @@
     win_file:
       path: C:\Temp\nmx
       state: absent
-

@@ -47,6 +47,12 @@
       win_file:
         path: C:\Temp\Temp
         state: absent
+    - import_tasks: Test-Ansible-Commands.yml
+      vars:
+        hostname: "{{version}}"
+    - import_tasks: Test-Ansible-Commands.yml
+      vars:
+        hostname: "{{buildnumber}}"
 #when: shell_result.stdout_lines[0].find("eng") == -1
 #    - set_fact:
 #        constructbuildnumber: "{{shell_result.stdout_lines[0].split('.')}}"
