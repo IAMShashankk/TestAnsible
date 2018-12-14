@@ -54,7 +54,7 @@
         path: "{{ uninstallStringFile.value | regex_replace('^\"|\"$', '') }}"
         product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
         arguments: /SP- /SILENT /SUPPRESSMSGBOXES
-        reboot_required: true
+        reboot_required: false
         state: absent
     when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Setup Autologon for starting remote session after reboot
@@ -76,8 +76,6 @@
     pause:
       seconds: 120
     when: NMX_Installed is defined and NMX_Installed.exists==true
-  - name: Setup Autologon for starting remote session after reboot once installation is done
-    win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
   - name: Find the installation file
     win_find:
       paths: C:\Temp\nmx
@@ -89,8 +87,10 @@
       path: "{{resultFile.files[0].path}}"
       product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
       arguments: /SP- /SILENT /SUPPRESSMSGBOXES /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}"
-      reboot_required: true
+      reboot_required: false
       state: present
+  - name: Setup Autologon for starting remote session after reboot once installation is done
+    win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
   - name: Reboot NMX server after Installing NMX
     win_shell: Restart-Computer -Force
   - name: Wait 1 minutes for server to reboot
