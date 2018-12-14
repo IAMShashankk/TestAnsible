@@ -52,7 +52,7 @@
       win_service:
         name: XServer
         state: stopped
-      when: XMSService.state == started
+      when: XMSService.state == "running"
 #    - import_tasks: Install_Uninstall_NMX.yml
 #      vars:
 #        nmx_version: "{{version}}"
