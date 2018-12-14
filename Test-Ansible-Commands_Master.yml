@@ -51,8 +51,8 @@
       vars:
         nmx_version: "{{version}}"
         build_number: "{{buildnumber}}"
-        url_username: ""
-        url_password: ""
+        username: ""
+        password: ""
         nmx_username: administrator
         nmx_password: Harmonic2008
     - import_tasks: Test-Ansible-Commands.yml
