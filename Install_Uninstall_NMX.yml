@@ -49,23 +49,23 @@
       name: UninstallString
     register: uninstallStringFile
     when: NMX_Installed is defined and NMX_Installed.exists==true
-#  - name: Uninstall NMX
-#    win_package:
-#        path: "{{ uninstallStringFile.value | regex_replace('^\"|\"$', '') }}"
-#        product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
-#        arguments: /SP- /SILENT /SUPPRESSMSGBOXES
-#        reboot_required: true
-#        state: absent
-#    when: NMX_Installed is defined and NMX_Installed.exists==true
+  - name: Uninstall NMX
+    win_package:
+        path: "{{ uninstallStringFile.value | regex_replace('^\"|\"$', '') }}"
+        product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
+        arguments: /SP- /SILENT /SUPPRESSMSGBOXES
+        reboot_required: true
+        state: absent
+    when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Setup Autologon for starting remote session after reboot
     win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
   - name: Reboot NMX server after uninstalling NMX
     win_shell: Restart-Computer -Force
-#    when: NMX_Installed is defined and NMX_Installed.exists==true
-  - name: Wait 2 minutes for server to reboot
+    when: NMX_Installed is defined and NMX_Installed.exists==true
+  - name: Wait 1 minutes for server to reboot
     pause:
-      seconds: 120
-#    when: NMX_Installed is defined and NMX_Installed.exists==true
+      seconds: 60
+    when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Ping Host machine - wait till it restarts - timeout 10 minutes
     win_wait_for:
       host: "{{ ansible_host }}"
@@ -75,7 +75,7 @@
   - name: Wait 2 minutes  after reboot to run the uninstall finalization scripts
     pause:
       seconds: 120
-#    when: NMX_Installed is defined and NMX_Installed.exists==true
+    when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Setup Autologon for starting remote session after reboot once installation is done
     win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
   - name: Find the installation file
@@ -84,25 +84,27 @@
       patterns: ['*.exe']
       recurse: True
     register: resultFile
-#  - name: Install NMX
-#    win_package:
-#      path: "{{resultFile.files[0].path}}"
-#      product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
-#      arguments: /SP- /SILENT /SUPPRESSMSGBOXES /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}"
-#      reboot_required: true
-#      state: present
-  - name: Reboot NMX server after uninstalling NMX
+  - name: Install NMX
+    win_package:
+      path: "{{resultFile.files[0].path}}"
+      product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
+      arguments: /SP- /SILENT /SUPPRESSMSGBOXES /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}"
+      reboot_required: true
+      state: present
+  - name: Reboot NMX server after Installing NMX
     win_shell: Restart-Computer -Force
-  - name: Wait 2 minutes for server to reboot
+  - name: Wait 1 minutes for server to reboot
     pause:
-      seconds: 120
-    when: NMX_Installed is defined and NMX_Installed.exists==true
+      seconds: 60
   - name: Ping Host machine - wait till it restarts - timeout 10 minutes
     win_wait_for:
       host: "{{ ansible_host }}"
       port: "{{ansible_port}}" #SSH Port
       state: started
       timeout: 600 #wait for 10 minutes to bring machine up
+  - name: Wait 1 minutes for server to reboot
+    pause:
+      seconds: 80
   - name: Delete the NMX folder
     win_file:
       path: C:\Temp\nmx

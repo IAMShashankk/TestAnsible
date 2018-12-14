@@ -55,9 +55,6 @@
         password: ""
         nmx_username: administrator
         nmx_password: Harmonic2008
-    - import_tasks: Test-Ansible-Commands.yml
-      vars:
-        hostname: "{{buildnumber}}"
 #when: shell_result.stdout_lines[0].find("eng") == -1
 #    - set_fact:
 #        constructbuildnumber: "{{shell_result.stdout_lines[0].split('.')}}"
