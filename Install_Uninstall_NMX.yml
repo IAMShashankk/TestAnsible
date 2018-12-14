@@ -54,17 +54,17 @@
         path: "{{ uninstallStringFile.value | regex_replace('^\"|\"$', '') }}"
         product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
         arguments: /SP- /SILENT /SUPPRESSMSGBOXES
-        reboot_required: false
         state: absent
     when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Setup Autologon for starting remote session after reboot
     win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
+    when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Reboot NMX server after uninstalling NMX
     win_shell: Restart-Computer -Force
     when: NMX_Installed is defined and NMX_Installed.exists==true
-  - name: Wait 1 minutes for server to reboot
+  - name: Wait 2 minutes for server to reboot
     pause:
-      seconds: 60
+      seconds: 120
     when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Ping Host machine - wait till it restarts - timeout 10 minutes
     win_wait_for:
@@ -87,24 +87,23 @@
       path: "{{resultFile.files[0].path}}"
       product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
       arguments: /SP- /SILENT /SUPPRESSMSGBOXES /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}"
-      reboot_required: false
       state: present
   - name: Setup Autologon for starting remote session after reboot once installation is done
     win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
   - name: Reboot NMX server after Installing NMX
     win_shell: Restart-Computer -Force
-  - name: Wait 1 minutes for server to reboot
+  - name: Wait 2 minutes for server to reboot
     pause:
-      seconds: 60
+      seconds: 120
   - name: Ping Host machine - wait till it restarts - timeout 10 minutes
     win_wait_for:
       host: "{{ ansible_host }}"
       port: "{{ansible_port}}" #SSH Port
       state: started
       timeout: 600 #wait for 10 minutes to bring machine up
-  - name: Wait 1 minutes for server to reboot
+  - name: Wait 2 minutes for server to reboot
     pause:
-      seconds: 80
+      seconds: 120
   - name: Delete the NMX folder
     win_file:
       path: C:\Temp\nmx
