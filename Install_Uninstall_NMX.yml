@@ -30,7 +30,7 @@
       state: absent
   - name: Download NMX build from FTP with authentication
     win_get_url:
-      url: "http://hivy/artifactory/ivy-repos/harmonic/nmx/{{version}}/{{build_number}}/nmx_build_output.zip"
+      url: "http://hivy/artifactory/ivy-repos/harmonic/nmx/{{nmx_version}}/{{build_number}}/nmx_build_output.zip"
       dest: c:\temp\
       url_username: "{{username}}"
       url_password: "{{password}}"
@@ -49,23 +49,23 @@
       name: UninstallString
     register: uninstallStringFile
     when: NMX_Installed is defined and NMX_Installed.exists==true
-  - name: Uninstall NMX
-    win_package:
-        path: "{{ uninstallStringFile.value | regex_replace('^\"|\"$', '') }}"
-        product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
-        arguments: /SP- /SILENT /SUPPRESSMSGBOXES
-        reboot_required: true
-        state: absent
-    when: NMX_Installed is defined and NMX_Installed.exists==true
+#  - name: Uninstall NMX
+#    win_package:
+#        path: "{{ uninstallStringFile.value | regex_replace('^\"|\"$', '') }}"
+#        product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
+#        arguments: /SP- /SILENT /SUPPRESSMSGBOXES
+#        reboot_required: true
+#        state: absent
+#    when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Setup Autologon for starting remote session after reboot
     win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
   - name: Reboot NMX server after uninstalling NMX
     win_shell: Restart-Computer -Force
-    when: NMX_Installed is defined and NMX_Installed.exists==true
+#    when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Wait 2 minutes for server to reboot
     pause:
       seconds: 120
-    when: NMX_Installed is defined and NMX_Installed.exists==true
+#    when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Ping Host machine - wait till it restarts - timeout 10 minutes
     win_wait_for:
       host: "{{ ansible_host }}"
@@ -75,7 +75,7 @@
   - name: Wait 2 minutes  after reboot to run the uninstall finalization scripts
     pause:
       seconds: 120
-    when: NMX_Installed is defined and NMX_Installed.exists==true
+#    when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Setup Autologon for starting remote session after reboot once installation is done
     win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
   - name: Find the installation file
@@ -84,13 +84,13 @@
       patterns: ['*.exe']
       recurse: True
     register: resultFile
-  - name: Install NMX
-    win_package:
-      path: "{{resultFile.files[0].path}}"
-      product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
-      arguments: /SP- /SILENT /SUPPRESSMSGBOXES /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}"
-      reboot_required: true
-      state: present
+#  - name: Install NMX
+#    win_package:
+#      path: "{{resultFile.files[0].path}}"
+#      product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
+#      arguments: /SP- /SILENT /SUPPRESSMSGBOXES /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}"
+#      reboot_required: true
+#      state: present
   - name: Reboot NMX server after uninstalling NMX
     win_shell: Restart-Computer -Force
   - name: Wait 2 minutes for server to reboot
