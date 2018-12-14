@@ -30,9 +30,6 @@
       register: shell_result
     - set_fact:
         buildnumber: "{{shell_result.stdout_lines[0]}}"
-    - debug:
-        msg: Abc
-      when: buildnumber.find("eng") == -1
     - set_fact:
         version: "trunk"
       when: buildnumber.find("eng") != -1
@@ -42,7 +39,7 @@
     - set_fact:
         version: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.x.{{constructbuildnumber[3]}}"
         buildnumber: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.{{constructbuildnumber[2]}}.{{constructbuildnumber[3]}}.{{ constructbuildnumber[4] | regex_replace('^0', '')}}"
-      when: constructbuildnumber[0] != -1
+      when: buildnumber.find("eng") == -1
     - name: Delete the Unzipped folder
       win_file:
         path: C:\Temp\Temp
