@@ -44,14 +44,23 @@
       win_file:
         path: C:\Temp\Temp
         state: absent
-    - import_tasks: Install_Uninstall_NMX.yml
-      vars:
-        nmx_version: "{{version}}"
-        build_number: "{{buildnumber}}"
-        username: ""
-        password: ""
-        nmx_username: administrator
-        nmx_password: Harmonic2008
+    - name: Check if a service is installed
+      win_service:
+        name: XServer
+      register: XMSService
+    - name: Pause a service
+      win_service:
+        name: XServer
+        state: stopped
+      when: XMSService.state == started
+#    - import_tasks: Install_Uninstall_NMX.yml
+#      vars:
+#        nmx_version: "{{version}}"
+#        build_number: "{{buildnumber}}"
+#        username: ""
+#        password: ""
+#        nmx_username: administrator
+#        nmx_password: Harmonic2008
 #when: shell_result.stdout_lines[0].find("eng") == -1
 #    - set_fact:
 #        constructbuildnumber: "{{shell_result.stdout_lines[0].split('.')}}"
