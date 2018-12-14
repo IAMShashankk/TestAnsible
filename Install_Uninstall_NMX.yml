@@ -76,12 +76,15 @@
     pause:
       seconds: 120
     when: NMX_Installed is defined and NMX_Installed.exists==true
-  - name: Setup Autologon for starting remote session after reboot once installation is done
-    win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
-  - name: Check if a service is installed
+  - name: Check if XMS service is installed
     win_service:
-      name: service name
-    register: XServer
+      name: XServer
+    register: XMSService
+  - name: Stop XMS service if it is running
+    win_service:
+      name: XServer
+      state: stopped
+    when: XMSService.state == "running"
   - name: Find the installation file
     win_find:
       paths: C:\Temp\nmx
