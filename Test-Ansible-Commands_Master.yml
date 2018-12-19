@@ -1,69 +1,10 @@
 ---
-#- hosts: all
-#  vars:
-#    hostname: shasha
-#  tasks:
+- hosts: all
+  vars:
+    hostname: shasha
+  tasks:
     - set_fact:
         catalogName: "{{catalog_url.split('/')[-1]}}"
-    - name: Download ActivateCatalog zip
-      win_uri:
-        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/rest/api/latest/projects/NMXGROUP/repos/nmx_playbooks/archive?format=zip"
-        dest: C:/Temp/
-        creates: true
-        user: smishra
-        password: India@1943
-#    - name: Download ActivateCatalog zip
-#      win_get_url:
-#        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/Install_Uninstall_NMX.yml"
-#        dest: C:/Temp/
-#    - name: Download ActivateCatalog zip
-#      win_get_url:
-#        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/nmx_playbooks.abc"
-#        dest: C:/Temp/
-#    - name: Download ActivateCatalog zip
-#      win_get_url:
-#        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/nmx_playbooks.zip"
-#        dest: C:/Temp/
-#    - name: Make catalog active
-#      win_package:
-#        path: C:\Program Files\Harmonic\NMX\DOTNETGUI\AnsibleActivateCatalog.exe
-#        product_id: ConsoleApp
-#        arguments: /{{catalogName.split('.')[0]}} /{{sql_servername}} /{{sql_password}} /{{ansible_host}}
-#      when: catalogName is defined
-#    - import_tasks: Install_Uninstall_NMX.yml
-#      vars:
-#        nmx_version: "{{version}}"
-#        build_number: "{{buildnumber}}"
-#        username: ""
-#        password: ""
-#        nmx_username: administrator
-#        nmx_password: Harmonic2008
-#when: shell_result.stdout_lines[0].find("eng") == -1
-#    - set_fact:
-#        constructbuildnumber: "{{shell_result.stdout_lines[0].split('.')}}"
-#        version: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.x.{{constructbuildnumber[3]}}"
-#        buildnumber: "{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.{{constructbuildnumber[2]}}.{{constructbuildnumber[3]}}.{{constructbuildnumber[4]}}{{ constructbuildnumber[5] | regex_replace('^0/', '') }}"
-#      when: shell_result.stdout_lines[0].find("eng") == -1		
-#    - import_tasks: Test-Ansible-Commands.yml
-#      vars:
-#        hostname: abc
-#    - import_tasks: Test-Ansible-Commands.yml
-#      vars:
-#        hostname: shashank
-#    - name: Download ActivateCatalog zip
-#      win_get_url:
-#        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/Install_Uninstall_NMX.yml"
-#        dest: c:\temp\  
-#$xml.DatabaseList.Item.Info.CreatedBy	 
-#    - name: Copy the Activate Catalog file
-#      win_copy:
-#        src: C:\DatabaseBkup\TestAnsible.hzp
-#        dest: C:\temp\TestAnsible.hzp
-#        remote_src: yes
-#    - name: rename the file
-#      win_command: cmd.exe /C rename C:\temp\TestAnsible.hzp TestAnsible1.zip
-#    - name: Unzip the Download ActivateCatalog zip
-#      win_unzip:
-#        src: C:\DatabaseBkup\TestAnsible1.zip
-#        dest: C:\temp\
-#        rm: True
+    - import_tasks: ActivateCatalog.yml
+      vars:
+        catalogName: "{{catalogNameM}}"

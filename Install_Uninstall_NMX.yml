@@ -1,6 +1,5 @@
 ---
 # Ansible playbook to Uninstall and Install NMX
-#  tasks:
   - name: Get active catalog name
     win_reg_stat:
       path: HKLM:\SOFTWARE\Harmonic\MEM
