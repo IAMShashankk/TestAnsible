@@ -17,7 +17,7 @@
       win_package:
         path: C:\Program Files\Harmonic\NMX\DOTNETGUI\AnsibleActivateCatalog.exe
         product_id: ConsoleApp
-        arguments: /{{catalogNameM.split('.')[0]}} /{{sql_servername}} /{{sql_password}} /{{ansible_host}}
+        arguments: /{{catalogNameM}} /{{sql_servername}} /{{sql_password}} /{{ansible_host}}
 #    - import_tasks: ActivateCatalog.yml
 #      vars:
 #        catalogName: "{{catalogNameM}}"
