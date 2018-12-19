@@ -6,5 +6,4 @@
     - set_fact:
         catalogNameM: "{{catalog_url.split('/')[-1]}}"
     - import_playbook: ActivateCatalog.yml
-      vars:
         catalogName: "{{catalogNameM}}"
