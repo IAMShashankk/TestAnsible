@@ -7,20 +7,20 @@
         catalogName: "{{catalog_url.split('/')[-1]}}"
     - name: Download ActivateCatalog zip
       win_get_url:
-        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/AnsibleActivateCatalog-Copy.exe_"
+        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/rest/api/latest/projects/NMXGROUP/repos/nmx_playbooks/archive?format=zip"
         dest: C:/Temp/
-    - name: Download ActivateCatalog zip
-      win_get_url:
-        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/Install_Uninstall_NMX.yml"
-        dest: C:/Temp/
-    - name: Download ActivateCatalog zip
-      win_get_url:
-        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/nmx_playbooks.abc"
-        dest: C:/Temp/
-    - name: Download ActivateCatalog zip
-      win_get_url:
-        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/nmx_playbooks.zip"
-        dest: C:/Temp/
+#    - name: Download ActivateCatalog zip
+#      win_get_url:
+#        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/Install_Uninstall_NMX.yml"
+#        dest: C:/Temp/
+#    - name: Download ActivateCatalog zip
+#      win_get_url:
+#        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/nmx_playbooks.abc"
+#        dest: C:/Temp/
+#    - name: Download ActivateCatalog zip
+#      win_get_url:
+#        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/nmx_playbooks.zip"
+#        dest: C:/Temp/
 #    - name: Make catalog active
 #      win_package:
 #        path: C:\Program Files\Harmonic\NMX\DOTNETGUI\AnsibleActivateCatalog.exe
