@@ -1,0 +1,55 @@
+---
+# Ansible playbook to run Windows Update and restart, if required
+#
+# http://docs.ansible.com/ansible/win_updates_module.html
+# https://docs.ansible.com/ansible/win_reboot_module.html
+- hosts: all
+  tasks:
+    - set_fact:
+        catalogName: "{{catalog_url.split('/')[-1]}}"
+      when: catalogName is not defined
+    - name: Download catalog from specified URL
+      win_get_url:
+        url: "{{catalog_url}}"
+        dest: c:\DatabaseBkup\
+        url_username: "{{url_username}}"
+        url_password: "{{url_password}}"
+      when: catalogName is not defined
+    - name: Obtain information about a file
+      win_stat:
+        path: C:\Program Files\Harmonic\NMX\DOTNETGUI\AnsibleActivateCatalog.exe
+      register: file_info
+    - name: Download ActivateCatalog zip
+      win_get_url:
+        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/AnsibleActivateCatalog.exe"
+        dest: C:\Program Files\Harmonic\NMX\DOTNETGUI\
+      when: file_info.stat.exists==false
+#    - name: Unzip the Download ActivateCatalog zip
+#      win_unzip:
+#        src: c:\temp\master.zip
+#        dest: C:\temp\
+#        rm: True
+#      when: file_info.stat.exists==false
+#    - name: Find the Activate Catalog file
+#      win_find:
+#        paths: C:\Temp\AWX_CatalogActive-master
+#        patterns: ['*.exe']
+#        recurse: True
+#      register: resultFile
+#      when: file_info.stat.exists==false
+#    - name: Copy the Activate Catalog file
+#      win_copy:
+#        src: "{{resultFile.files[0].path}}"
+#        dest: C:\Program Files\Harmonic\NMX\DOTNETGUI\
+#        remote_src: yes
+#      when: file_info.stat.exists==false
+    - name: Make catalog active
+      win_package:
+        path: C:\Program Files\Harmonic\NMX\DOTNETGUI\AnsibleActivateCatalog.exe
+        product_id: ConsoleApp
+        arguments: /{{catalogName.split('.')[0]}} /{{sqlServername}} /{{sqlPassword}}
+      when: catalogName is defined
+#    - name: Delete the Active Catalog folder
+#      win_file:
+#        path: C:\Temp\AWX_CatalogActive-master
+#        state: absent

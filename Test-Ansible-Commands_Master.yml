@@ -4,7 +4,7 @@
     hostname: shasha
   tasks:
     - set_fact:
-        catalogName: "{{catalog_url.split('/')[-1]}}"
+        catalogNameM: "{{catalog_url.split('/')[-1]}}"
     - name: Download catalog from specified URL
       win_get_url:
         url: "{{catalog_url}}"
@@ -13,11 +13,11 @@
         url_password: "{{url_password}}"
     - name: Copy the Catalog file to Temp
       win_copy:
-        src: C:\DatabaseBkup\{{catalogName}}
-        dest: C:\temp\{{catalogName}}
+        src: C:\DatabaseBkup\{{catalogNameM}}
+        dest: C:\temp\{{catalogNameM}}
         remote_src: yes
     - name: Rename the catalog file
-      win_command: cmd.exe /C rename C:\temp\{{catalogName}} TestAnsible1.zip
+      win_command: cmd.exe /C rename C:\temp\{{catalogNameM}} TestAnsible1.zip
     - name: Unzip the catalog to get metadataxml
       win_unzip:
         src: C:\temp\TestAnsible1.zip
@@ -44,14 +44,20 @@
       win_file:
         path: C:\Temp\Temp
         state: absent
-    - import_tasks: Install_Uninstall_NMX.yml
+    - import_tasks: ActivateCatalog.yml
       vars:
-        nmx_version: "{{version}}"
-        build_number: "{{buildnumber}}"
-        username: ""
+        catalogName: "{{catalogNameM}}"
+        sqlServername: "{{sql_servername}}"
+        sqlPassword: "{{sql_password}}"
         password: ""
-        nmx_username: administrator
-        nmx_password: Harmonic2008
+#    - import_tasks: Install_Uninstall_NMX.yml
+#      vars:
+#        nmx_version: "{{version}}"
+#        build_number: "{{buildnumber}}"
+#        username: ""
+#        password: ""
+#        nmx_username: administrator
+#        nmx_password: Harmonic2008
 #when: shell_result.stdout_lines[0].find("eng") == -1
 #    - set_fact:
 #        constructbuildnumber: "{{shell_result.stdout_lines[0].split('.')}}"
