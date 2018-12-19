@@ -5,12 +5,16 @@
   tasks:
     - set_fact:
         catalogName: "{{catalog_url.split('/')[-1]}}"
-    - name: Make catalog active
-      win_package:
-        path: C:\Program Files\Harmonic\NMX\DOTNETGUI\AnsibleActivateCatalog.exe
-        product_id: ConsoleApp
-        arguments: /{{catalogName.split('.')[0]}} /{{sql_servername}} /{{sql_password}} /{{ansible_host}}
-      when: catalogName is defined
+    - name: Download ActivateCatalog zip
+      win_get_url:
+        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/AnsibleActivateCatalog.exe"
+        dest: C:\Temp\
+#    - name: Make catalog active
+#      win_package:
+#        path: C:\Program Files\Harmonic\NMX\DOTNETGUI\AnsibleActivateCatalog.exe
+#        product_id: ConsoleApp
+#        arguments: /{{catalogName.split('.')[0]}} /{{sql_servername}} /{{sql_password}} /{{ansible_host}}
+#      when: catalogName is defined
 #    - import_tasks: Install_Uninstall_NMX.yml
 #      vars:
 #        nmx_version: "{{version}}"
