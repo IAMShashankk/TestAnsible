@@ -4,51 +4,13 @@
     hostname: shasha
   tasks:
     - set_fact:
-        catalogNameM: "{{catalog_url.split('/')[-1]}}"
-    - name: Download catalog from specified URL
-      win_get_url:
-        url: "{{catalog_url}}"
-        dest: c:\DatabaseBkup\
-        url_username: "{{url_username}}"
-        url_password: "{{url_password}}"
-    - name: Copy the Catalog file to Temp
-      win_copy:
-        src: C:\DatabaseBkup\{{catalogNameM}}
-        dest: C:\temp\{{catalogNameM}}
-        remote_src: yes
-    - name: Rename the catalog file
-      win_command: cmd.exe /C rename C:\temp\{{catalogNameM}} TestAnsible1.zip
-    - name: Unzip the catalog to get metadataxml
-      win_unzip:
-        src: C:\temp\TestAnsible1.zip
-        dest: C:\temp\temp
-        rm: True
-    - name: Run shell command to read xml file and NMX version
-      win_shell: |
-        [xml]$xml = Get-Content C:\temp\temp\MetaData.xml
-        $xml.DatabaseList.Item.Info.CreatedBy
-      register: shell_result
-    - set_fact:
-        buildnumber: "{{shell_result.stdout_lines[0]}}"
-    - set_fact:
-        version: "trunk"
-      when: buildnumber.find("eng") != -1
-    - set_fact:
-        constructbuildnumber: "{{buildnumber.split('.')}}"
-    - set_fact:
-        version: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.x.{{constructbuildnumber[3]}}"
-      when: buildnumber.find("eng") == -1
-    - set_fact:
-        buildnumber: "{{constructbuildnumber[0]}}.{{constructbuildnumber[1]}}.{{constructbuildnumber[2]}}.{{constructbuildnumber[3]}}.{{ constructbuildnumber[4] | regex_replace('^0', '')}}"
-    - name: Delete the Unzipped folder
-      win_file:
-        path: C:\Temp\Temp
-        state: absent
-    - import_tasks: ActivateCatalog.yml
-      vars:
-        catalogName: "{{catalogNameM}}"
-        sqlServername: "{{sql_servername}}"
-        sqlPassword: "{{sql_password}}"
+        catalogName: "{{catalog_url.split('/')[-1]}}"
+    - name: Make catalog active
+      win_package:
+        path: C:\Program Files\Harmonic\NMX\DOTNETGUI\AnsibleActivateCatalog.exe
+        product_id: ConsoleApp
+        arguments: /{{catalogName.split('.')[0]}} /{{sql_servername}} /{{sql_password}} /{{ansible_host}}
+      when: catalogName is defined
 #    - import_tasks: Install_Uninstall_NMX.yml
 #      vars:
 #        nmx_version: "{{version}}"
