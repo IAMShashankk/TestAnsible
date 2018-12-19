@@ -5,5 +5,4 @@
   tasks:
     - set_fact:
         catalogNameM: "{{catalog_url.split('/')[-1]}}"
-    - include: ActivateCatalog.yml
-        catalogName: "{{catalogNameM}}"
+    - include: ActivateCatalog.yml catalogName = "{{catalogNameM}}"
