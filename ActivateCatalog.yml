@@ -32,7 +32,7 @@
       when: file_info.stat.exists==false
     - name: Find the Activate Catalog file
       win_find:
-        paths: C:\Temp\AWX_CatalogActive-master
+        paths: C:\Temp\TestAnsible-master
         patterns: ['*.exe']
         recurse: True
       register: resultFile
