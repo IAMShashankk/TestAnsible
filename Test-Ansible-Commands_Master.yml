@@ -49,7 +49,6 @@
         catalogName: "{{catalogNameM}}"
         sqlServername: "{{sql_servername}}"
         sqlPassword: "{{sql_password}}"
-        password: ""
 #    - import_tasks: Install_Uninstall_NMX.yml
 #      vars:
 #        nmx_version: "{{version}}"
