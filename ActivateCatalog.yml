@@ -3,8 +3,8 @@
 #
 # http://docs.ansible.com/ansible/win_updates_module.html
 # https://docs.ansible.com/ansible/win_reboot_module.html
-#- hosts: all
-#  tasks:
+ hosts: all
+  tasks:
     - set_fact:
         catalogName: "{{catalog_url.split('/')[-1]}}"
       when: catalogName is not defined

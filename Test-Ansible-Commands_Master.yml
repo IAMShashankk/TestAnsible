@@ -5,19 +5,6 @@
   tasks:
     - set_fact:
         catalogNameM: "{{catalog_url.split('/')[-1]}}"
-    - debug:
-        msg: "{{catalogNameM}}"
-    - debug:
-        msg: "{{sql_servername}}"
-    - debug:
-        msg: "{{sql_password}}"
-    - debug:
-        msg: "{{ansible_host}}"
-    - name: Make catalog active
-      win_package:
-        path: C:\Program Files\Harmonic\NMX\DOTNETGUI\AnsibleActivateCatalog.exe
-        product_id: ConsoleApp
-        arguments: /{{catalogNameM}} /{{sql_servername}} /{{sql_password}} /{{ansible_host}}
-#    - import_tasks: ActivateCatalog.yml
-#      vars:
-#        catalogName: "{{catalogNameM}}"
+    - import_playbook: ActivateCatalog.yml
+      vars:
+        catalogName: "{{catalogNameM}}"
