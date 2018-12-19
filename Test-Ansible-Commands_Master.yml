@@ -1,8 +1,8 @@
 ---
-- hosts: all
-  vars:
-    hostname: shasha
-  tasks:
+#- hosts: all
+#  vars:
+#    hostname: shasha
+#  tasks:
     - set_fact:
         catalogName: "{{catalog_url.split('/')[-1]}}"
     - name: Download ActivateCatalog zip
