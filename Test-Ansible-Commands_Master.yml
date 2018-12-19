@@ -7,7 +7,7 @@
         catalogName: "{{catalog_url.split('/')[-1]}}"
     - name: Download ActivateCatalog zip
       win_get_url:
-        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/AnsibleActivateCatalog.exe"
+        url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/AnsibleActivateCatalog.zip"
         dest: C:/Temp/AnsibleActivateCatalog.exe
         force: no
 #    - name: Make catalog active
