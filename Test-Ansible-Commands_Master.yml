@@ -5,4 +5,6 @@
   tasks:
     - set_fact:
         catalogNameM: "{{catalog_url.split('/')[-1]}}"
-    - import: ActivateCatalog.yml catalogName = "{{catalogNameM}}"
+    - import_playbook: ActivateCatalog.yml catalogName = "{{catalogNameM}}"
+    - include: ActivateCatalog.yml catalogName = "{{catalogNameM}}"
+      remote_src: true
