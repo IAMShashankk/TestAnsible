@@ -9,7 +9,7 @@
       win_get_url:
         url: "https://NMXAutomation@bitbucket360.harmonicinc.com/projects/NMXGROUP/repos/nmx_playbooks/browse/nmx_playbooks/AnsibleActivateCatalog.exe"
         dest: C:/Temp/AnsibleActivateCatalog.exe
-        force: Yes
+        force: no
 #    - name: Make catalog active
 #      win_package:
 #        path: C:\Program Files\Harmonic\NMX\DOTNETGUI\AnsibleActivateCatalog.exe
