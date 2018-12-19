@@ -47,7 +47,7 @@
       win_package:
         path: C:\Program Files\Harmonic\NMX\DOTNETGUI\AnsibleActivateCatalog.exe
         product_id: ConsoleApp
-        arguments: /{{catalogName.split('.')[0]}} /{{sqlServername}} /{{sqlPassword}}
+        arguments: /{{catalogName.split('.')[0]}} /{{sqlServername}} /{{sqlPassword}} /{{ansible_host}}
       when: catalogName is defined
 #    - name: Delete the Active Catalog folder
 #      win_file:
