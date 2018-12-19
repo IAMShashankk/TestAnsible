@@ -30,6 +30,12 @@
         dest: C:\temp\
         rm: True
       when: file_info.stat.exists==false
+    - debug:
+        msg: {{catalogName}}
+    - debug:
+        msg: {{sql_servername}}
+    - debug:
+        msg: {{sql_password}}
     - name: Find the Activate Catalog file
       win_find:
         paths: C:\Temp\TestAnsible-master
