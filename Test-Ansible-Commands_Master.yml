@@ -4,7 +4,7 @@
     hostname: shasha
   tasks:
     - set_fact:
-        catalogName: "{{catalog_url.split('/')[-1]}}"
+        catalogNameM: "{{catalog_url.split('/')[-1]}}"
     - import_tasks: ActivateCatalog.yml
       vars:
         catalogName: "{{catalogNameM}}"

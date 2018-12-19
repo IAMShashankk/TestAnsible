@@ -51,5 +51,5 @@
       when: catalogName is defined
     - name: Delete the Active Catalog folder
       win_file:
-        path: C:\Temp\AWX_CatalogActive-master
+        path: C:\Temp\TestAnsible-master
         state: absent
