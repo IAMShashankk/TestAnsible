@@ -6,7 +6,7 @@
     - set_fact:
         catalogNameM: "{{catalog_url.split('/')[-1]}}"
     - debug:
-        msg: "{{catalogName}}"
+        msg: "{{catalogNameM}}"
     - debug:
         msg: "{{sql_servername}}"
     - debug:
