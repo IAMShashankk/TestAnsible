@@ -7,7 +7,7 @@
       win_package:
         path: C:\Temp\AnsibleActivateCatalog.exe
         product_id: ConsoleApp
-        arguments: /2018-12-18-03.52_7.5.3.0.225.00_AA.hzp /{{sql_servername}} /{{sql_password}} /{{ansible_host}} /">c:\Temp\AnsibleLogs\ActivateCatalogLog.txt"
+        arguments: /2018-12-18-03.52_7.5.3.0.225.00_AA.hzp /{{sql_servername}} /{{sql_password}} /{{ansible_host}} />c:\Temp\AnsibleLogs\ActivateCatalogLog.txt
 #    - set_fact:
 #        catalogNameM: "{{catalog_url.split('/')[-1]}}"
 #    - import_playbook: ActivateCatalog.yml catalogName = "{{catalogNameM}}"
