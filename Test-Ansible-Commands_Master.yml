@@ -5,6 +5,7 @@
   tasks:
     - name: Save the result of 'whoami' in 'whoami_out'
       win_command: AnsibleActivateCatalog.exe abc.hzp {{sql_servername}} {{sql_password}} {{ansible_host}}
+      args:
         chdir: C:\Program Files\Harmonic\NMX\DOTNETGUI\
       register: whoami_out
 #    - set_fact:
