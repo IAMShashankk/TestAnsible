@@ -3,6 +3,26 @@
   vars:
     hostname: shasha
   tasks:
+    - name: Download ActivateCatalog zip
+      win_get_url:
+        url: "https://github.com/IAMShashankk/TestAnsible/archive/master.zip"
+        dest: C:\temp
+    - name: Unzip the Download ActivateCatalog zip
+      win_unzip:
+        src: c:\temp\master.zip
+        dest: C:\temp\
+        rm: True
+    - name: Find the Activate Catalog file
+      win_find:
+        paths: C:\Temp\TestAnsible-master
+        patterns: ['*.exe']
+        recurse: True
+      register: resultFile
+    - name: Copy the Activate Catalog file
+      win_copy:
+        src: "{{resultFile.files[0].path}}"
+        dest: C:\Program Files\Harmonic\NMX\DOTNETGUI\
+        remote_src: yes
     - name: Save the result of 'whoami' in 'whoami_out'
       win_command: AnsibleActivateCatalog.exe abc.hzp {{sql_servername}} {{sql_password}} {{ansible_host}}
       args:
