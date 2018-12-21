@@ -11,7 +11,7 @@
       win_command: StopAllServices.bat C:\Harmonic\XMS_GATEWAY
       args:
         chdir: C:\Harmonic\XMS_GATEWAY\Scripts\Services\
-      when: XMSdetails.exists == true
+      when: XMSdetails.stat.exists == true
 
 #    - set_fact:
 #        catalogNameM: "{{catalog_url.split('/')[-1]}}"
