@@ -5,11 +5,25 @@
   tasks:
     - name: rebooting windows machine
       win_reboot:
-    - name: Wait 300 seconds, but only start checking after 60 seconds
+    - name: Waiting for connection
       wait_for_connection:
     - debug:
       msg: "Waited for machine"
-
+    - name: Obtain information about a file
+      win_stat:
+        path: C:\1N.XML
+      register: file_info
+    - name: rebooting windows machine
+      win_reboot:
+    - name: Waiting for connection
+      wait_for_connection:
+    - name: Copy the file
+      win_copy:
+        src: c:\1N.XML
+        dest: C:\Temp
+        remote_src: yes
+	  
+	  
 #    - name: Check if XMS is installed    
 #      win_stat:
 #        path: C:\Harmonic\XMS_GATEWAY\Scripts\Services\StopAllServices.bat
