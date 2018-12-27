@@ -1,5 +1,12 @@
 ---
-# Ansible playbook to Uninstall and Install NMX
+# Ansible playbook to run Windows Update and restart, if required
+#
+# http://docs.ansible.com/ansible/win_updates_module.html
+# https://docs.ansible.com/ansible/win_reboot_module.html
+- hosts: all
+  vars:
+    hostname: shasha
+  tasks:
   - name: Get active catalog name
     win_reg_stat:
       path: HKLM:\SOFTWARE\Harmonic\MEM
