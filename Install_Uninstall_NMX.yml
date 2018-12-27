@@ -109,15 +109,15 @@
     register: resultFile
   - name: Setup Autologon for starting remote session after reboot once installation is done
     win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
-  - name: Install NMX via Command Prompt
-    win_command: "{{resultFile.files[0].path}}" /SP- /SILENT /SUPPRESSMSGBOXES /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}" /Log="c:\Temp\AnsibleLogs\InstallLog.txt"
-#  - name: Install NMX
-#    win_package:
-#      path: "{{resultFile.files[0].path}}"
-#      product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
-#      arguments: /SP- /SILENT /SUPPRESSMSGBOXES /NORESTART /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}"
-#      state: present
-#    register: installresult
+#  - name: Install NMX via Command Prompt
+#    win_command: "{{resultFile.files[0].path}}" /SP- /SILENT /SUPPRESSMSGBOXES /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}" /Log="c:\Temp\AnsibleLogs\InstallLog.txt"
+  - name: Install NMX
+    win_package:
+      path: "{{resultFile.files[0].path}}"
+      product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
+      arguments: /SP- /SILENT /SUPPRESSMSGBOXES /NORESTART /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}"
+      state: present
+    register: installresult
   - name: rebooting windows machine after install
     win_reboot:
       post_reboot_delay: 120
