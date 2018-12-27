@@ -13,8 +13,8 @@
       name: UninstallString
     register: uninstallStringFile
     when: NMX_Installed is defined and NMX_Installed.exists==true
-  - debug:
-      msg:'"{{ uninstallStringFile.value | regex_replace('^\"|\"$', '') }}"'
+  - name: Uninstall NMX via Command Prompt
+    win_command: '"{{ uninstallStringFile.value | regex_replace('^\"|\"$', '') }}" /SP- /SILENT /SUPPRESSMSGBOXES /Log="c:\Temp\AnsibleLogs\UninstallLog.txt"'
 #    - name: rebooting windows machine
 #      win_reboot:
 #    - name: Waiting for connection
