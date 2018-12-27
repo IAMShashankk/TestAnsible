@@ -56,7 +56,7 @@
     register: uninstallStringFile
     when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Uninstall NMX via Command Prompt
-    win_command: unins000.exe /SP- /SILENT /SUPPRESSMSGBOXES /Log="c:\Temp\AnsibleLogs\UninstallLog.txt"
+    win_command: '"{{ uninstallStringFile.value | regex_replace('^\"|\"$', '') }}" /SP- /SILENT /SUPPRESSMSGBOXES /Log="c:\Temp\AnsibleLogs\UninstallLog.txt"'
     args:
       chdir: C:\Program Files\Harmonic\
     when: NMX_Installed is defined and NMX_Installed.exists==true
