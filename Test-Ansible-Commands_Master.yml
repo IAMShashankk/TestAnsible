@@ -14,7 +14,7 @@
     register: uninstallStringFile
     when: NMX_Installed is defined and NMX_Installed.exists==true
   - debug:
-      msg:'"{{ uninstallStringFile.value | regex_replace(''^\"|\"$'', '''') }}"'
+      msg:'"{{ uninstallStringFile.value | regex_replace('^\"|\"$', '') }}"'
 #    - name: rebooting windows machine
 #      win_reboot:
 #    - name: Waiting for connection
