@@ -55,10 +55,11 @@
       name: UninstallString
     register: uninstallStringFile
     when: NMX_Installed is defined and NMX_Installed.exists==true
+  - set_fact:
+        uninstallPath: "{{ uninstallStringFile.value | regex_replace('^\"|\"$', '') }}"
+    when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Uninstall NMX via Command Prompt
-    win_command: '"{{ uninstallStringFile.value | regex_replace(''^\"|\"$'', '''') }}" /SP- /SILENT /SUPPRESSMSGBOXES /Log="c:\Temp\AnsibleLogs\UninstallLog.txt"'
-    args:
-      chdir: C:\Program Files\Harmonic\
+    win_command: '"{{uninstallPath}}" /SP- /SILENT /SUPPRESSMSGBOXES /Log="c:\Temp\AnsibleLogs\UninstallLog.txt"'
     when: NMX_Installed is defined and NMX_Installed.exists==true
 # - name: Uninstall NMX
 #    win_package:
@@ -111,7 +112,7 @@
 #  - name: Setup Autologon for starting remote session after reboot once installation is done
 #    win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
   - name: Install NMX via Command Prompt
-    win_command: '"{{resultFile.files[0].path}}" /SP- /SILENT /SUPPRESSMSGBOXES /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}" /Log="c:\Temp\AnsibleLogs\InstallLog.txt"'
+    win_command: '"{{resultFile.files[0].path}}" /SP- /SILENT /SUPPRESSMSGBOXES /NORESTART /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}" /Log="c:\Temp\AnsibleLogs\InstallLog.txt"'
     register: installresult
 #  - name: Install NMX
 #    win_package:
