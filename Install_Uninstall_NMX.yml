@@ -67,12 +67,13 @@
 #        arguments: /SP- /SILENT /SUPPRESSMSGBOXES
 #        state: absent
 #    when: NMX_Installed is defined and NMX_Installed.exists==true
-  - name: Setup Autologon for starting remote session after reboot
-    win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
-    when: NMX_Installed is defined and NMX_Installed.exists==true
+#  - name: Setup Autologon for starting remote session after reboot
+#    win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
+#    when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: rebooting windows machine
     win_reboot:
       post_reboot_delay: 120
+    when: NMX_Installed is defined and NMX_Installed.exists==true
   - name: Waiting for connection
     wait_for_connection:
 #  - name: Reboot NMX server after uninstalling NMX
@@ -107,8 +108,8 @@
       patterns: ['*.exe']
       recurse: True
     register: resultFile
-  - name: Setup Autologon for starting remote session after reboot once installation is done
-    win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
+#  - name: Setup Autologon for starting remote session after reboot once installation is done
+#    win_shell: C:\Utilities\Autologon.exe /accepteula "{{ nmx_username }}" . "{{ nmx_password }}"
   - name: Install NMX via Command Prompt
     win_command: '"{{resultFile.files[0].path}}" /SP- /SILENT /SUPPRESSMSGBOXES /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}" /Log="c:\Temp\AnsibleLogs\InstallLog.txt"'
     register: installresult
