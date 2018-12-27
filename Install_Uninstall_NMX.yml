@@ -122,7 +122,7 @@
   - name: rebooting windows machine after install
     win_reboot:
       post_reboot_delay: 120
-    when: installresult.exit_code==0
+    when: installresult.rc==0
   - name: Waiting for connection
     wait_for_connection:
 #  - name: Wait 2 minutes for server to reboot
