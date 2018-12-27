@@ -20,7 +20,7 @@
     - name: Copy the file
       win_copy:
         src: c:\1N.XML
-        dest: C:\Temp
+        dest: C:\Temp\1N.XML
         remote_src: yes	  
 #    - name: Check if XMS is installed    
 #      win_stat:
