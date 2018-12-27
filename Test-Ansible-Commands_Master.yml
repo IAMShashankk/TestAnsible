@@ -3,15 +3,20 @@
   vars:
     hostname: shasha
   tasks:
-    - name: Check if XMS is installed    
-      win_stat:
-        path: C:\Harmonic\XMS_GATEWAY\Scripts\Services\StopAllServices.bat
-      register: XMSdetails
-    - name: Prior to un-install stop the XM services
-      win_command: StopAllServices.bat C:\Harmonic\XMS_GATEWAY
-      args:
-        chdir: C:\Harmonic\XMS_GATEWAY\Scripts\Services\
-      when: XMSdetails.stat.exists == true
+    - name: Wait 300 seconds, but only start checking after 60 seconds
+      wait_for_connection:
+    - debug:
+      msg: "Waited for machine"
+
+#    - name: Check if XMS is installed    
+#      win_stat:
+#        path: C:\Harmonic\XMS_GATEWAY\Scripts\Services\StopAllServices.bat
+#      register: XMSdetails
+#    - name: Prior to un-install stop the XM services
+#      win_command: StopAllServices.bat C:\Harmonic\XMS_GATEWAY
+#      args:
+#        chdir: C:\Harmonic\XMS_GATEWAY\Scripts\Services\
+#      when: XMSdetails.stat.exists == true
 
 #    - set_fact:
 #        catalogNameM: "{{catalog_url.split('/')[-1]}}"
