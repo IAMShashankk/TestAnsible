@@ -69,6 +69,7 @@
     win_reboot:
       post_reboot_delay: 120
   - name: Waiting for connection
+    wait_for_connection:
 #  - name: Reboot NMX server after uninstalling NMX
 #    win_shell: Restart-Computer -Force
 #    when: NMX_Installed is defined and NMX_Installed.exists==true
@@ -115,6 +116,7 @@
       post_reboot_delay: 120
     when: installresult.exit_code==0
   - name: Waiting for connection
+    wait_for_connection:
 #  - name: Wait 2 minutes for server to reboot
 #    pause:
 #      seconds: 120
