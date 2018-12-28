@@ -3,24 +3,11 @@
   vars:
     hostname: shasha
   tasks:
-    - name: Wait for Domain Manager Process
-      win_wait_for_process:
-        process_name: HLDomainManagerProcess Module
-        state: present
-        timeout: 500
-    - debug:
-      msg: "Before Restart"
-    - name: rebooting windows machine
-      win_reboot:
-    - name: Waiting for connection
-      wait_for_connection:
-    - name: Wait for Domain Manager Process
-      win_wait_for_process:
-        process_name: HLDomainManagerProcess Module
-        state: present
-        timeout: 500
-    - debug:
-      msg: "after restart"
+    - name: Check DM Process
+      win_command: HLDomainManagerProcess.exe
+      args:
+        chdir: C:\Program Files\Harmonic\NMX\DomainManager
+      register: status
   
 #  - name: check if NMX is already installed
 #    win_reg_stat:
