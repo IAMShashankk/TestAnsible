@@ -6,7 +6,7 @@
     - name: Check DM Process
       win_command: HLDomainManagerProcess.exe
       args:
-        chdir: C:\Program Files\Harmonic\NMX\DomainManager
+        chdir: C:\Program Files\Harmonic\NMX\DomainManager\
       register: status
   
 #  - name: check if NMX is already installed
