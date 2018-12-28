@@ -79,6 +79,7 @@
   - name: reboot system after un-install
     win_reboot:
       post_reboot_delay: 120	
+      reboot_timeout: 3600
     when: NMX_Installed is defined and NMX_Installed.exists==true	
   - name: Waiting for connection to come up
     wait_for_connection:
@@ -109,6 +110,7 @@
   - name: Reboot system after install
     win_reboot:
       post_reboot_delay: 180	
+      reboot_timeout: 3600
   - name: Waiting for connection to come up
     wait_for_connection:
   - name: Delete the NMX folder
