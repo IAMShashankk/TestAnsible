@@ -104,7 +104,7 @@
     win_package:
       path: "{{resultFile.files[0].path}}"
       product_id: '{0940EFBB-D1FC-4C6F-91E0-996D9E40B2A2}_is1'
-      arguments: /SP- /SILENT /SUPPRESSMSGBOXES /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}" /Log="c:\Temp\AnsibleLogs\InstallLog.txt"
+      arguments: /SP- /SILENT /SUPPRESSMSGBOXES /NORESTART /Type=ClientAndServer /NDDS_DOMAINID="{{SiteID}}" /Log="c:\Temp\AnsibleLogs\InstallLog.txt"
       state: present
   - name: Reboot system after install
     win_reboot:
