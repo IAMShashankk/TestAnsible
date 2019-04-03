@@ -7,5 +7,9 @@
   vars:
     hostname: shasha
   tasks:
+    - name: Get running processes
+      win_shell: Get-Process java
+      register: running_processes
     - name: Kill Java Process
       win_shell: Stop-Process -Name "java" -Force
+      when: running_processes.stat.exists == true
